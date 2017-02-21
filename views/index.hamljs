@@ -1,0 +1,13 @@
+%html
+  %head
+    %title Hola haml!!!!!!!
+  %body
+    %p Hola #{nombre.primerNombre} #{nombre.apellido}
+      %a(href='google.com') Google
+    %h1(class="clase-h1", id="saludo-grandote") hola
+    %h2 #{numero1} #{numero2}
+    - if(numero1 < numero2)
+      %p numero 2 es mayor
+    %ul
+      - each pais in paises
+        %li #{pais}
