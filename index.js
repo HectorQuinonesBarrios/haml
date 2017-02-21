@@ -1,22 +1,18 @@
+var fs = require('fs');
 var express = require('express');
-var hamljs = require('hamljs')
+var hamljs = require('hamljs');
 var app = express();
-app.engine('.haml', require('hamljs').renderFile);
-app.set("view engine", "hamljs");
+
 
 app.get('/', function(req, res) {
-  var nombre = new Object();
-  nombre.primerNombre = "Hector ";
-  nombre.apellido = "Quinones";
+  var hamlView = fs.readFileSync('views/index.haml', 'utf-8');
+  var nombre = "Hector";
 
-  var numero1 = 4;
-  var numero2 = 8;
+  var paises = ['México', 'China', 'Canada', 'Papua Nueva Guinea', "Republica democratica del Congo"];
 
-  var paises = ["México", "China", "Canada", "Papua Nueva Guinea"];
+  res.end(hamljs.render(hamlView, {locals: {nombre:nombre, paises:paises}}));
 
-
-  res.render("index.hamljs", {nombre:nombre, numero1:numero1,
-     numero2:numero2, paises:paises});
 });
 
 app.listen(8080);
+console.log('App listenting in port:',8080);
